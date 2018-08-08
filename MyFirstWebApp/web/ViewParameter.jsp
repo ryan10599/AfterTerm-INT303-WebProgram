@@ -4,6 +4,7 @@
     Author     : INT303
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,5 +26,25 @@
             <input type="checkbox" name="subjects" value="Software Process">Software Process<br>
             <input type="submit"/>
         </form>
+        <hr>
+        <table>
+            <tr>
+                <td>Student ID:</td>
+                <td>${param.id}</td>
+            </tr>
+            <tr>
+                <td>Student Name:</td>
+                <td>${param.name}</td>
+            </tr>
+            <tr>
+                <td>Your Favorite Subjects:</td>
+                <td>
+                    <c:forEach items="${subjectList}" var="str">
+                        ${str}<br>
+                    </c:forEach>
+                </td>
+            </tr>
+        </table>
+        
     </body>
 </html>
