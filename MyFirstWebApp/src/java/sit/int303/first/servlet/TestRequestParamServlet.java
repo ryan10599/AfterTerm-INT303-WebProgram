@@ -43,7 +43,7 @@ public class TestRequestParamServlet extends HttpServlet {
         }
         
         request.setAttribute("subjectList", subjectList);
-        getServletContext().getRequestDispatcher("ViewParameter.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/ViewParameter.jsp").forward(request,response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
