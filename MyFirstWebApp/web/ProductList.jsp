@@ -18,6 +18,7 @@
         <h1>ProductList</h1>
         <table class="table">
             <thead>
+                
                 <th>No</th>
                 <th>Product Code</th>
                 <th>Product Name</th>
@@ -28,6 +29,7 @@
             <tbody> 
             <c:forEach items="${products}" var="p" varStatus="vs">
                 <tr>
+                    <td><img src="model-images/${p.productCode}.jpg" width="120"</td>
                 <td>${vs.count}</td>
                  <td>${p.productCode}</td>
                  <td>${p.productName}</td>
