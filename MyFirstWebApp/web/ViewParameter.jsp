@@ -17,7 +17,7 @@
         <form action="TestRequestParam" method="post">
             Your Student Id:<input type="text" name="id"/><br>
             Your Name: <input type="text" name="name"/><br>
-            Favorite Subject:
+            Favorite Subject:<br>
             <input type="checkbox" name="subjects" value="Web Programming">Web Programming<br>
             <input type="checkbox" name="subjects" value="Computer Network">Computer Network<br>
             <input type="checkbox" name="subjects" value="Network Programming">Network Programming<br>
