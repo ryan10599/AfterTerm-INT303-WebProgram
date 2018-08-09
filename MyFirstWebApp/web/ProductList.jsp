@@ -29,6 +29,7 @@
                 <th>Product Line</th>
                 <th>Scale</th>
                 <th>Price</th>
+                <th>Add Cart</th>
                 </thead>
                 <tbody> 
                     <c:forEach items="${products}" var="p" varStatus="vs">
@@ -40,6 +41,11 @@
                             <td>${p.productLine}</td>
                             <td>${p.productScale}</td>
                             <td>${p.msrp}</td>
+                            <td>
+                                <a href="AddItemToCart?productCode=${p.productCode}">
+                                    <input type="button" value="Add To Cart"/>
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>    
