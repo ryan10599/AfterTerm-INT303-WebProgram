@@ -43,7 +43,8 @@ public class AddItemToCartServlet extends HttpServlet {
         String productCode = request.getParameter("productCode");
         Product p = ProductMockup.getProduct(productCode);
         cart.add(p);
-        getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
+        //getServletContext().getRequestDispatcher("/ProductList").forward(request, response);
+        response.sendRedirect("ProductList");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
