@@ -33,7 +33,7 @@
                 <tbody> 
                     <c:forEach items="${products}" var="p" varStatus="vs">
                         <tr>
-                            <td><img src="model-images/${p.productCode}.jpg" width="120"</td>
+                            <td><img src="model-images/${p.productCode}.jpg" width="120"></td>
                             <td>${vs.count}</td>
                             <td>${p.productCode}</td>
                             <td>${p.productName}</td>
