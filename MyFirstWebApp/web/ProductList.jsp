@@ -22,7 +22,7 @@
             <table class="table">
                 <tr>
                     <td><h1>Product List::</h1></td>
-                    <td>Your Cart:(${cart.totalQuatity})</td>
+                    <td><a href="ShowCart">Your Cart:(${cart.totalQuatity})</a></td>
                 </tr>
             </table>
             
