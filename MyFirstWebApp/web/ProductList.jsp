@@ -19,7 +19,13 @@
     </head>
     <body>
         <div class="container">
-            <h1>Product List</h1>
+            <table class="table">
+                <tr>
+                    <td><h1>Product List::</h1></td>
+                    <td>Your Cart:(${cart.totalQuatity})</td>
+                </tr>
+            </table>
+            
             <table id="example" class="table">
                 <thead>
                 <th>IMG</th>
@@ -42,6 +48,10 @@
                             <td>${p.productScale}</td>
                             <td>${p.msrp}</td>
                             <td>
+                                <form action="AddItemToCart" method="post">
+                                    <input type="hidden" value="${p.productCode}" name="productCode"/>
+                                    <input type="submit" value="Add To Cart"/>
+                                </form>
                                 <a href="AddItemToCart?productCode=${p.productCode}">
                                     <input type="button" value="Add To Cart"/>
                                 </a>
