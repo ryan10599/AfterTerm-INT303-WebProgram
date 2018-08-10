@@ -49,7 +49,7 @@ public class ShoppingCart implements Serializable{
         }
         return sum;
     }
-    public int getTotalQuatity(){
+    public int getTotalQuantity(){
         int sum = 0;
         Collection<LineItem> lineItems = cart.values();
         for(LineItem lineItem : lineItems){
