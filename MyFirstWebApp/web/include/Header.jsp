@@ -8,11 +8,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <table class="table">
     <tr>
-        <td><h1>${param.title}</h1></td>
+        <td>
+            <a href="index.html" title="Back to Home"><img src="https://www.cohnreznick.com/-/media/images/logos/cr_logo_animation.svg" width="120"/></a>
+            <h1>${param.title}</h1>
+        </td>
         <td>
             <c:if test="${cart!=null}">
             <a href="ShowCart">Your Cart:(${cart.totalQuantity})</a>
             </c:if>
+            &nbsp;&nbsp;&nbsp;
             <c:choose>
                 <c:when test="${sessionScope.user != null}">
                     Hello${sessionScope.user.name}
