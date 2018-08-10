@@ -42,9 +42,11 @@
                 <td>${cl.salePrice}</td>
             </tr>
         </c:forEach>
-            <div>
-                <h2>Total Price = ${cart.totalPrice}</h2>
-            </div>
+            <tr>
+                <td colspan="2"></td>
+                <td>${cart.totalQuantity}</td>
+                <td>${cart.totalPrice}</td>
+            </tr>
         
     </table>
 </body>
