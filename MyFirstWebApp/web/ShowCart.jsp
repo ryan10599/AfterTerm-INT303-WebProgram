@@ -24,6 +24,9 @@
 
     </head>
     <body>
+        <div class="container">
+            <jsp:include page="include/Header.jsp?title=Your Shopping Cart ::"/>
+        </div>
         <h1>Your Cart</h1>
         <table id="example" class="table">
             <thead>
@@ -51,7 +54,7 @@
         </c:forEach>
             <tr>
                 <td colspan="2"></td>
-                <td>${cart.totalQuatity}</td>
+                <td>${cart.totalQuantity}</td>
                 <td> ${cart.totalPrice}</td>
             </tr>
         
