@@ -42,7 +42,7 @@ public class ShowCartServlet extends HttpServlet {
             
         }
         
-        
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST,"Session Time Out...Try Again");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
