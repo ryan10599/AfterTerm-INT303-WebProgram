@@ -44,8 +44,8 @@
         </c:forEach>
             <tr>
                 <td colspan="2"></td>
-                <td>${cart.totalQuantity}</td>
-                <td>${cart.totalPrice}</td>
+                <td>${cart.totalQuatity}</td>
+                <td> ${cart.totalPrice}</td>
             </tr>
         
     </table>
