@@ -4,6 +4,7 @@
     Author     : INT303
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,15 +32,21 @@
             <th>Product Code</th>
             <th>Product Line</th>
             <th>Price</th>
-
         </thead>
+        
+        <c:set var="items" value="${sessionScope.cart.lineItems}"/>
+        <c:set var="bgColorX" value="lightgray"/>
+        <c:set var="bgColorY" value="white"/>
+        
         <c:forEach items="${cart.lineItems}" var="cl" varStatus="vs">
-            <tr>
+            <tr style="background-color: ${vs.count%2==1?bgColorX:bgColorY}">
                 <td>${vs.count}</td>
                 <td>${cl.product.productName}</td>
                 <td>${cl.product.msrp}</td>
                 <td>${cl.quantity}</td>
-                <td>${cl.salePrice}</td>
+                <td style="text-align: right">
+                    <fmt:formatNumber value="${cl.salePrice}" pattern="#,###.00"/>
+                </td>
             </tr>
         </c:forEach>
             <tr>
