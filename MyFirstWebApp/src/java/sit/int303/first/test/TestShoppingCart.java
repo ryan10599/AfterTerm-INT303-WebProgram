@@ -43,15 +43,15 @@ public class TestShoppingCart {
         }
 
         System.out.println("Total price:" + cart.getTotalPrice());
-        System.out.println("Total quantity:" + cart.getTotalQuatity());
+        System.out.println("Total quantity:" + cart.getTotalQuantity());
 
         cart.remove("S10_001");
         System.out.println("Total price:" + cart.getTotalPrice());
-        System.out.println("Total quantity:" + cart.getTotalQuatity());
+        System.out.println("Total quantity:" + cart.getTotalQuantity());
 
         cart.remove(p);
         System.out.println("Total price:" + cart.getTotalPrice());
-        System.out.println("Total quantity:" + cart.getTotalQuatity());
+        System.out.println("Total quantity:" + cart.getTotalQuantity());
     }
 
 }
