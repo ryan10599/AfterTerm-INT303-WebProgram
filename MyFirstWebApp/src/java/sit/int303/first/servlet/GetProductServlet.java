@@ -7,17 +7,27 @@ package sit.int303.first.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
+import sit.int303.first.jpa.model.Product;
+import sit.int303.first.jpa.model.controller.ProductJpaController;
 
 /**
  *
  * @author INT303
  */
 public class GetProductServlet extends HttpServlet {
-
+    @PersistenceUnit(unitName = "MyFirstWebAppPU")
+    EntityManagerFactory emf;
+    
+    @Resource
+    UserTransaction utx;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,18 +39,16 @@ public class GetProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetProductServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetProductServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String productCode = request.getParameter("productCode");
+        if(productCode == null){
+            response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED);
+        }else {
+            ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+            Product product = productJpaCtrl.findProduct(productCode);
+            //System.out.println("product code:"+ product.getProductcode());
+            //System.out.println("product description:"+ product.getProductdescription());
+            request.setAttribute("product", product);
+            getServletContext().getRequestDispatcher("/ViewProductDetail.jsp").forward(request, response);
         }
     }
 
