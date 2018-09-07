@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="container">
-            <jsp:include page="include/Header.jsp?title=Authentication::">
+            <jsp:include page="include/Header.jsp?title=Authentication::"/>
                 <form action="Login" method="post">
                     <table class="table">
                         <tr>
@@ -33,6 +33,6 @@
                         </tr>
                     </table>
                 </form>
-        </div>
-    </body>
-</html>
+            </div>
+        </body>
+    </html>
