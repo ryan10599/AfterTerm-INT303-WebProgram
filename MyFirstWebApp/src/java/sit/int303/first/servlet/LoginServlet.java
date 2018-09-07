@@ -23,11 +23,13 @@ import sit.int303.first.jpa.model.controller.CustomerJpaController;
  * @author INT303
  */
 public class LoginServlet extends HttpServlet {
+
     @Resource
     UserTransaction utx;
-    
+
     @PersistenceUnit(unitName = "MyFirstWebAppPU")
     EntityManagerFactory emf;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,18 +46,17 @@ public class LoginServlet extends HttpServlet {
         if (userName != null && userName.length() > 0 && password != null && password.length() > 0) {
             CustomerJpaController customerJpaCtrl = new CustomerJpaController(utx, emf);
             Customer c = customerJpaCtrl.findCustomer(Integer.valueOf(userName));
-            if(c!=null){
-                if(password.equals(c.getContactfirstname())){
-                    request.getSession().setAttribute(userName,c);
+            if (c != null) {
+                if (password.equals(c.getContactfirstname())) {
+                    request.getSession().setAttribute("user", c);
                     getServletContext().getRequestDispatcher("/index.html").forward(request, response);
                     return;
                 }
             }
-            request.setAttribute("message","Invalid user name or password !!!");
-        } 
-            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            request.setAttribute("message", "Invalid user name or password !!!");
         }
-    
+        getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
