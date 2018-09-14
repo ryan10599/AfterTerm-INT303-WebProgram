@@ -64,6 +64,9 @@ public class RegisterServlet extends HttpServlet {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        request.setAttribute("email", email);
+        getServletContext().getRequestDispatcher("/Activate.jsp").forward(request, response);
 
     }
 
