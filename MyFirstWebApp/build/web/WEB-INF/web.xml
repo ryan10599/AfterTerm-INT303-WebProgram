@@ -78,6 +78,10 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>sit.int303.first.servlet.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ActivateServlet</servlet-name>
+        <servlet-class>sit.int303.first.servlet.ActivateServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SimpleCalculatorServlet</servlet-name>
         <url-pattern>/SimpleCalc</url-pattern>
@@ -129,6 +133,10 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActivateServlet</servlet-name>
+        <url-pattern>/Activate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
