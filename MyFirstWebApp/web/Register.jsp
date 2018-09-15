@@ -12,13 +12,27 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="Register" method="post">
-            Email <input type="text" name="email"/>
-            <br>
-            Password <input type="password" name="password"/>
-            <br>
-            
-            <input type="submit">
-        </form>
-    </body>
+    <center><div id="header"> 
+            Register
+        </div></center>
+    <hr>
+    <center>
+        <div style="background-color: lightgreen; margin-left: 250px; margin-right: 250px; padding: 25px; border-radius: 25px" >
+            <form action="Register" method="post">
+                Email
+                <br>
+                <input type="email" name="email" required/>
+                <br>
+                <br>
+                Password 
+                <br>
+                <input type="password" name="password" required/>
+                <br>
+                <br>
+                <input type="submit">
+            </form>
+        </div>
+    </center>
+</body>
+
 </html>

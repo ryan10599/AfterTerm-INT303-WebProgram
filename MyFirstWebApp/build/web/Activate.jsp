@@ -12,10 +12,18 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action = "Activate" method="post">
-            <input type="text" name="email" value="${email}" hidden>
-            Activate <input type="text" name="activate">
-            <input type="submit">
-        </form>
-    </body>
+    <center>
+        <div style="background-color: lightcoral; margin-left: 250px; margin-right: 250px; padding: 25px; border-radius: 25px">
+            <form action = "Activate" method="post">
+                <input type="text" name="email" value="${email}" hidden>
+                Activate 
+                <br>
+                <input type="text" name="activate" required>
+                <br>
+                <br>
+                <input type="submit">
+            </form>
+        </div>
+    </center>
+</body>
 </html>

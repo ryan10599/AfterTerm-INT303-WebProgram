@@ -41,25 +41,26 @@ public final class Register_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("<!DOCTYPE html>\n");
-      out.write("<html>\n");
-      out.write("    <head>\n");
-      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title>JSP Page</title>\n");
-      out.write("    </head>\n");
-      out.write("    <body>\n");
-      out.write("        <form>\n");
-      out.write("            Email <input type=\"text\" />\n");
-      out.write("            <br>\n");
-      out.write("            Password <input type=\"password\"/>\n");
-      out.write("            <br>\n");
-      out.write("            activatekey <input type=\"text\"/>\n");
-      out.write("        </form>\n");
-      out.write("    </body>\n");
-      out.write("</html>\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("<!DOCTYPE html>\r\n");
+      out.write("<html>\r\n");
+      out.write("    <head>\r\n");
+      out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
+      out.write("        <title>JSP Page</title>\r\n");
+      out.write("    </head>\r\n");
+      out.write("    <body>\r\n");
+      out.write("        <form action=\"Register\" method=\"post\">\r\n");
+      out.write("            Email <input type=\"text\" name=\"email\"/>\r\n");
+      out.write("            <br>\r\n");
+      out.write("            Password <input type=\"password\" name=\"password\"/>\r\n");
+      out.write("            <br>\r\n");
+      out.write("            \r\n");
+      out.write("            <input type=\"submit\">\r\n");
+      out.write("        </form>\r\n");
+      out.write("    </body>\r\n");
+      out.write("</html>\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
