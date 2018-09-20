@@ -7,6 +7,8 @@ package todo.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -48,6 +50,7 @@ public class LoginServlet extends HttpServlet {
             Account account = accountJpa.findAccount(username);
             if(account!=null){
                 String passwordDB = account.getPassword();
+                password = cryptWithMD5(password);
                 if(passwordDB.equals(password)){
                     request.getSession().setAttribute("User", account);
                     getServletContext().getRequestDispatcher("/Task").forward(request, response);
@@ -56,6 +59,23 @@ public class LoginServlet extends HttpServlet {
         }
         getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
     }
+    public static String cryptWithMD5(String pass) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] passBytes = pass.getBytes();
+            md.reset();
+            byte[] digested = md.digest(passBytes);
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < digested.length; i++) {
+                sb.append(Integer.toHexString(0xff & digested[i]));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
