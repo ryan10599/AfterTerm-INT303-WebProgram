@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cinema.jpa.model;
+package shop.JPA.model.Controller;
 
-import cinema.jpa.model.exceptions.NonexistentEntityException;
-import cinema.jpa.model.exceptions.PreexistingEntityException;
-import cinema.jpa.model.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,14 +14,18 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.UserTransaction;
+import shop.JPA.model.Controller.exceptions.NonexistentEntityException;
+import shop.JPA.model.Controller.exceptions.PreexistingEntityException;
+import shop.JPA.model.Controller.exceptions.RollbackFailureException;
+import shop.JPA.model.Item;
 
 /**
  *
  * @author user
  */
-public class UsersJpaController implements Serializable {
+public class ItemJpaController implements Serializable {
 
-    public UsersJpaController(UserTransaction utx, EntityManagerFactory emf) {
+    public ItemJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
     }
@@ -35,12 +36,12 @@ public class UsersJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Users users) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(Item item) throws PreexistingEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            em.persist(users);
+            em.persist(item);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -48,8 +49,8 @@ public class UsersJpaController implements Serializable {
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
-            if (findUsers(users.getUserid()) != null) {
-                throw new PreexistingEntityException("Users " + users + " already exists.", ex);
+            if (findItem(item.getItemid()) != null) {
+                throw new PreexistingEntityException("Item " + item + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -59,12 +60,12 @@ public class UsersJpaController implements Serializable {
         }
     }
 
-    public void edit(Users users) throws NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Item item) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            users = em.merge(users);
+            item = em.merge(item);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -74,9 +75,9 @@ public class UsersJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = users.getUserid();
-                if (findUsers(id) == null) {
-                    throw new NonexistentEntityException("The users with id " + id + " no longer exists.");
+                String id = item.getItemid();
+                if (findItem(id) == null) {
+                    throw new NonexistentEntityException("The item with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -92,14 +93,14 @@ public class UsersJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
-            Users users;
+            Item item;
             try {
-                users = em.getReference(Users.class, id);
-                users.getUserid();
+                item = em.getReference(Item.class, id);
+                item.getItemid();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The users with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The item with id " + id + " no longer exists.", enfe);
             }
-            em.remove(users);
+            em.remove(item);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -115,19 +116,19 @@ public class UsersJpaController implements Serializable {
         }
     }
 
-    public List<Users> findUsersEntities() {
-        return findUsersEntities(true, -1, -1);
+    public List<Item> findItemEntities() {
+        return findItemEntities(true, -1, -1);
     }
 
-    public List<Users> findUsersEntities(int maxResults, int firstResult) {
-        return findUsersEntities(false, maxResults, firstResult);
+    public List<Item> findItemEntities(int maxResults, int firstResult) {
+        return findItemEntities(false, maxResults, firstResult);
     }
 
-    private List<Users> findUsersEntities(boolean all, int maxResults, int firstResult) {
+    private List<Item> findItemEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Users.class));
+            cq.select(cq.from(Item.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -139,20 +140,20 @@ public class UsersJpaController implements Serializable {
         }
     }
 
-    public Users findUsers(String id) {
+    public Item findItem(String id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Users.class, id);
+            return em.find(Item.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getUsersCount() {
+    public int getItemCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Users> rt = cq.from(Users.class);
+            Root<Item> rt = cq.from(Item.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

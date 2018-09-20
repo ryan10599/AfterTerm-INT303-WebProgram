@@ -5,18 +5,31 @@
  */
 package cinema.model;
 
+import cinema.jpa.model.Users;
+import cinema.jpa.model.controller.UsersJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author user
  */
 public class LoginServlet extends HttpServlet {
+
+    @PersistenceUnit(unitName = "CinemaPU")
+    EntityManagerFactory emf;
+
+    @Resource
+    UserTransaction utx;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,12 +42,27 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
+        String userid = request.getParameter("userid");
         String password = request.getParameter("password");
-        
-        if(username == null && password == null){
-            getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
+
+        if (userid != null && password != null) {
+            UsersJpaController userJpa = new UsersJpaController(utx, emf);
+           Users user = userJpa.findUsers(userid);
+           if(user!=null){
+               String passwordDB = user.getPassword();
+               if(password.equals(passwordDB)){
+                   request.getSession().setAttribute("loggedIn", user);
+                   response.sendRedirect("TicketManager");
+                   return;
+               }
+               
+           }
+           request.setAttribute("message", "Username invalid");
+           getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
         }
+
+        getServletContext().getRequestDispatcher("/LoginView.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

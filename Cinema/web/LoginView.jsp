@@ -1,22 +1,17 @@
-<%-- 
-    Document   : LoginView
-    Created on : Sep 17, 2018, 6:21:18 PM
-    Author     : user
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="Header.jsp?titleName=login"></jsp:include>
         <form action="Login" method="post">
-            UserName : <input type="text" name="username">
+            UserName : <input type="text" name="userid">
             Password : <input type="password" name="password">
             
             <input type="submit">
         </form>
+        <br>
+
+    <div>
+        ${message}
+    </div>
+
     </body>
 </html>
