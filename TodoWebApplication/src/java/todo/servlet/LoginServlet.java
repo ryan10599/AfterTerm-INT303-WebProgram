@@ -49,7 +49,8 @@ public class LoginServlet extends HttpServlet {
             if(account!=null){
                 String passwordDB = account.getPassword();
                 if(passwordDB.equals(password)){
-                    getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+                    request.getSession().setAttribute("User", account);
+                    getServletContext().getRequestDispatcher("/Task").forward(request, response);
                 }
             }
         }
